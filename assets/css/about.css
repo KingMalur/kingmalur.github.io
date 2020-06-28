@@ -1,0 +1,4 @@
+/* Overwrite the master setting even if it's not centered on desktop because it just looks better */
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}

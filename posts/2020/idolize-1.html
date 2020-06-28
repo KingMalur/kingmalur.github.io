@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>KingMalur - DevLog #1 - Idolize</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <!-- Font Noto Sans JP from Google Fonts -->
+    <!-- Privacy Notice: https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap&text=%c2%a9.!%27abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" rel="stylesheet"/>
+    <link href="../../assets/css/master.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="../../favicon.ico">
+  </head>
+  <body>
+    <!-- logo, name and page links -->
+    <header>
+      <div class="header-container">
+        <div class="header-image"><a href="../../index.html"><img src="../../assets/images/logo.svg" alt="Logo"/></a></div>
+        <div class="header-name"><strong>KingMalur</strong></div>
+      </div>
+      <div class="header-container header-links">
+        <div class="header-link"><a href="../../index.html">Home</a></div>
+        <div class="header-link"><a href="../../showcase.html">Showcase</a></div>
+        <div class="header-link"><a href="../../blog.html">Blog</a></div>
+        <div class="header-link"><a href="../../about.html">About</a></div>
+      </div>
+    </header>
+
+    <div class="page">
+      </article>
+        <section class="section-container">
+          <h2>DevLog #1 - Idolize!</h2>
+          <p>Hi 👋 and welcome to DevLog #1 of my first microGame Idolize!</p>
+          <p>In this game you control a wannabe influencer and pollute the internet with your thoughts. You have to fill out the blanks in your posts to collect and cultivate followers.</p>
+          <p>I started by creating a rough concept on how the game should work:</p>
+          <ol>
+            <li>Generate a post</li>
+            <li>Generate three possible answers</li>
+            <li>Select answer</li>
+            <li>See effect</li>
+          </ol>
+
+          <p>I then started to think about the configuration and data files and thought that Json should work ok.</p>
+          <p>After that I came up with a basic structure for my files. Here you can see my concept data structure for the posts. Each post consists of a <em>body</em> and can get one or multiple <em>answers</em> (here: option) depending on the <em>pick value</em>.</p>
+          <pre class="scroll-box">
+            <code>
+{
+  "body": [
+    {
+      "id": 1,
+      "text": "Ughh, I'm so booored! Ask me anything about my {_}!",
+      "pick": 1,
+      "value": 5,
+      "category": "Normal",
+    },
+  ],
+  "option": [
+    {
+      "id": 1,
+      "text": "Dog",
+      "value": 5,
+      "category": "Normal"
+    },
+  ],
+}
+            </code>
+          </pre>
+          <p class="hint">You can score <em>combos</em> if the categories match!</p>
+        </section>
+
+        <section class="section-container">
+          <p>But my SaveData objects look rather boring:</p>
+          <pre class="scroll-box">
+            <code>
+{
+    "data": [
+        {
+            "name": "Followers",
+            "value": 42,
+            "type": "Integer"
+        },
+    ]
+}
+            </code>
+          </pre>
+        </section>
+
+        <section class="section-container">
+          <p>But another interesting file to come up with was the message history:</p>
+          <pre class="scroll-box">
+            <code>
+{
+  "history": [
+    {
+      "bodyId": 1,
+      "optionId":
+        [
+          1,
+        ],
+      "followersGained": 15
+    },
+  ],
+}
+            </code>
+          </pre>
+          <p class="hint">Some posts allow <em>multiple options</em> to be selected!</p>
+          <p>I wanted to a lightweight file to save every message choice the player selected at some point but without some implementation done right now I don’t know if that file’s completed yet.</p>
+        </section>
+
+        <section class="section-container">
+          <p>Be sure to follow my progress on <a href="https://gitlab.com/KingMalurGames/microGames/idolize" target="_blank">GitLab</a>.</p>
+        </section>
+      </article>
+    </div>
+
+    <!-- email contact, social media icons and policies -->
+    <footer>
+      <section class="footer-item">
+        <a class="footer-link image-link" href="https://github.com/KingMalur" target="_blank"><img class="social-media-icon" alt="GitHub" src="../../assets/images/github.svg"/></a>
+        <a class="footer-link image-link" href="https://gitlab.com/KingMalur" target="_blank"><img class="social-media-icon" alt="GitLab" src="../../assets/images/gitlab.svg"/></a>
+        <a class="footer-link image-link" href="https://www.instagram.com/KingMalur/" target="_blank"><img class="social-media-icon" alt="Instagram" src="../../assets/images/instagram.svg"/></a>
+      </section>
+      <section class="footer-item">
+        <a class="footer-link" href="mailto:kingmalur@outlook.com">Send me an email!</a>
+      </section>
+      <section class="footer-item">
+        <a class="footer-link" href="../../policies/privacy-policy.html">Privacy Policy</a>
+        <a class="footer-link" href="../../policies/terms-and-conditions.html">Terms & Conditions</a>
+      </section>
+    </footer>
+  </body>
+</html>

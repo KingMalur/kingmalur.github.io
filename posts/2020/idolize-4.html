@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>KingMalur - DevLog #4 - Idolize</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <!-- Font Noto Sans JP from Google Fonts -->
+    <!-- Privacy Notice: https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap&text=%c2%a9.!%27abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" rel="stylesheet"/>
+    <link href="../../assets/css/master.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="../../favicon.ico">
+  </head>
+  <body>
+    <!-- logo, name and page links -->
+    <header>
+      <div class="header-container">
+        <div class="header-image"><a href="../../index.html"><img src="../../assets/images/logo.svg" alt="Logo"/></a></div>
+        <div class="header-name"><strong>KingMalur</strong></div>
+      </div>
+      <div class="header-container header-links">
+        <div class="header-link"><a href="../../index.html">Home</a></div>
+        <div class="header-link"><a href="../../showcase.html">Showcase</a></div>
+        <div class="header-link"><a href="../../blog.html">Blog</a></div>
+        <div class="header-link"><a href="../../about.html">About</a></div>
+      </div>
+    </header>
+
+    <div class="page">
+      <article>
+        <section class="section-container">
+          <h2>DevLog #4 - Idolize!</h2>
+          <p>Hi 👋 and welcome to DevLog #4 of Idolize!</p>
+          <p>The next part of the project - Saving ScriptableObjects as JSON-files - proved to be really tricky for me.</p>
+          <p class="hint">TL;DR: You <strong>cannot</strong> serialize a ScriptableObject directly to JSON! You have to encapsulate the data in a seperated class and convert between the two.</p>
+          <p>I started by building the Loading-UI, which was pretty straight forward, and converted the Concept-JSON-files into C# classes by using some online converter since I didn’t know where to start.</p>
+          <p>This is when I decided that it would be neat to edit all game data in the editor. <strong>This..was a bad idea.</strong> But hey, I didn’t know that until I wasted around 30min of my already tight 10h time budget.</p>
+          <p>I started by trying to serialize the objects like I did in RunAway, only difference was that I did it in binary there, but that failed miserably when I opened the files to see this:</p>
+          <pre class="scroll-box">
+            <code>
+{
+  "data": [
+    {
+      "instanceID": -20356
+    },
+    {
+      "instanceID": -20396
+    },
+    {
+      "instanceID": -20476
+    }
+  ]
+}
+            </code>
+          </pre>
+          <p class="hint">But hey, it’s serialized right?!</p>
+        </section>
+
+        <section class="section-container">
+          <p>I then read some forum entries about the serialization problems regarding Unitys’ ScriptableObjects and after some digging I found out that the JsonUtility cannot serialize ScriptableObjects!</p>
+          <p>After another 30 to 40 minutes I figured it out. This is a small code snippet of my data encapsulation:</p>
+          <pre class="scroll-box">
+            <code>
+// This is the code for my ScriptableObject:
+// Hint: ContractData is just a class derived of ScriptableObject with an int Id variable since I wanted one for every object.
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+// This is the the encapsulated data object
+[CreateAssetMenu(fileName = "SettingsData", menuName = "GameData/SettingsData", order = 3)]
+public class SettingsDataObject : ContractData
+{
+  [SerializeField]
+  public SettingsData SettingsData;
+}
+
+// This is the data the object has
+[System.Serializable]
+public class SettingsData
+{
+  public string Name;
+  public string Value;
+  public SettingsType Type;
+}
+
+// This is the object that acutally get's saved as JSON. It's build from a SettingsDataObject by creating a new object and is basically an array of ScriptableObjects data
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Settings
+{
+  [SerializeField]
+  public SettingsData[] data;
+
+  public Settings(List<SettingsDataObject> listOfData)
+  {
+    data = new SettingsData[listOfData.Count];
+    for (int i = 0; i < listOfData.Count; i++)
+    {
+      data[i] = listOfData[i].SettingsData;
+    }
+  }
+}
+            </code>
+          </pre>
+          <p class="hint">It looks just as aweful as it is..!</p>
+        </section>
+
+        <section class="section-container">
+          <p>Be sure to follow my progress on <a href="https://gitlab.com/KingMalurGames/microGames/idolize" target="_blank">GitLab</a>.</p>
+        </section>
+      <article>
+    </div>
+
+    <!-- email contact, social media icons and policies -->
+    <footer>
+      <section class="footer-item">
+        <a class="footer-link image-link" href="https://github.com/KingMalur" target="_blank"><img class="social-media-icon" alt="GitHub" src="../../assets/images/github.svg"/></a>
+        <a class="footer-link image-link" href="https://gitlab.com/KingMalur" target="_blank"><img class="social-media-icon" alt="GitLab" src="../../assets/images/gitlab.svg"/></a>
+        <a class="footer-link image-link" href="https://www.instagram.com/KingMalur/" target="_blank"><img class="social-media-icon" alt="Instagram" src="../../assets/images/instagram.svg"/></a>
+      </section>
+      <section class="footer-item">
+        <a class="footer-link" href="mailto:kingmalur@outlook.com">Send me an email!</a>
+      </section>
+      <section class="footer-item">
+        <a class="footer-link" href="../../policies/privacy-policy.html">Privacy Policy</a>
+        <a class="footer-link" href="../../policies/terms-and-conditions.html">Terms & Conditions</a>
+      </section>
+    </footer>
+  </body>
+</html>

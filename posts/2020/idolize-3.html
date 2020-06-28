@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>KingMalur - DevLog #3 - Idolize</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <!-- Font Noto Sans JP from Google Fonts -->
+    <!-- Privacy Notice: https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap&text=%c2%a9.!%27abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" rel="stylesheet"/>
+    <link href="../../assets/css/master.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="../../favicon.ico">
+  </head>
+  <body>
+    <!-- logo, name and page links -->
+    <header>
+      <div class="header-container">
+        <div class="header-image"><a href="../../index.html"><img src="../../assets/images/logo.svg" alt="Logo"/></a></div>
+        <div class="header-name"><strong>KingMalur</strong></div>
+      </div>
+      <div class="header-container header-links">
+        <div class="header-link"><a href="../../index.html">Home</a></div>
+        <div class="header-link"><a href="../../showcase.html">Showcase</a></div>
+        <div class="header-link"><a href="../../blog.html">Blog</a></div>
+        <div class="header-link"><a href="../../about.html">About</a></div>
+      </div>
+    </header>
+
+    <div class="page">
+      <article>
+        <section class="section-container">
+          <h2>DevLog #3 - Idolize!</h2>
+          <p>Hi 👋 and welcome to DevLog #3 of Idolize!</p>
+          <p>Now that the UI layout is finished the next task was to script the changing of the different pages the game has:</p>
+          <ol>
+            <li>Main Menu</li>
+            <li>Setup</li>
+            <li>Feed</li>
+            <li>History</li>
+            <li>Options</li>
+          </ol>
+          <p class="hint">I sure hope I don't need more.</p>
+        </section>
+
+        <section class="section-container">
+          <p>Last time I added the action buttons to switch between the pages easily but they needed some rules because I could not allow any page to be accessible by every other page.</p>
+          <p>These are the rules I came up with:</p>
+          <ol>
+            <li><strong>Main Menu</strong> can open <strong>Setup</strong> or <strong>Feed</strong></li>
+            <li><strong>Setup</strong> can open <strong>Feed</strong></li>
+            <li><strong>Feed</strong> can open <strong>History</strong/> or <strong>Options</strong></li>
+            <li><strong>History</strong> can open <strong>Feed</strong> or <strong>Options</strong></li>
+            <li><strong>Options</strong> can open <strong>History</strong> or <strong>Feed</strong></li>
+          </ol>
+          <p>Alright I’m honest: I came up with these rules while halfway through implementing the UI because I tested the scripts and thought: <strong>Well, that’s wrong.</strong></p>
+          <p>But it’s not fun presenting broken scripts so here’s how I did it:</p>
+          <pre class="scroll-box">
+            <code>
+// At first I created the page types
+public enum Pages
+{
+  None,
+  Feed,
+  History,
+  MainMenu,
+  Settings,
+  Setup,
+}
+
+// and made them accessible in the Unity editor.
+[System.Serializable]
+public class PagesTransformEntry
+{
+  public Pages pageType;
+  public Transform pageTransform;
+}
+
+// I then started implementing the PageControllers ability to change pages.
+public void OpenPage(Pages page)
+{
+  if (page == CurrentPage)
+  {
+    return;
+  }
+
+  var deactivatedPages = pages.Where(p => p.pageType != page);
+  foreach (var p in deactivatedPages)
+  {
+    p.pageTransform.gameObject.SetActive(false);
+  }
+
+  var activatedPages = pages.Where(p => p.pageType == page);
+  foreach (var p in activatedPages)
+  {
+    p.pageTransform.gameObject.SetActive(true);
+  }
+
+  CurrentPage = page;
+  PageChangedEvent?.Invoke();
+}
+
+// After changing the page, it calls a UnityEvent (PageChangedEvent) to the ActionButtons to enforce the page-changing rules:
+public void OnPageChanged()
+{
+  bool interactable = true;
+  if (deactivatingPages.Contains(pageController.CurrentPage))
+  {
+    interactable = false;
+  }
+
+  foreach (var b in buttons)
+  {
+    b.interactable = interactable;
+  }
+}
+            </code>
+          </pre>
+          <p>After a bit of testing and tweaking it finally worked like I wanted it to.</p>
+        </section>
+
+        <section class="section-container">
+          <p>Be sure to follow my progress on <a href="https://gitlab.com/KingMalurGames/microGames/idolize" target="_blank">GitLab</a>.</p>
+        </section>
+      <article>
+    </div>
+
+    <!-- email contact, social media icons and policies -->
+    <footer>
+      <section class="footer-item">
+        <a class="footer-link image-link" href="https://github.com/KingMalur" target="_blank"><img class="social-media-icon" alt="GitHub" src="../../assets/images/github.svg"/></a>
+        <a class="footer-link image-link" href="https://gitlab.com/KingMalur" target="_blank"><img class="social-media-icon" alt="GitLab" src="../../assets/images/gitlab.svg"/></a>
+        <a class="footer-link image-link" href="https://www.instagram.com/KingMalur/" target="_blank"><img class="social-media-icon" alt="Instagram" src="../../assets/images/instagram.svg"/></a>
+      </section>
+      <section class="footer-item">
+        <a class="footer-link" href="mailto:kingmalur@outlook.com">Send me an email!</a>
+      </section>
+      <section class="footer-item">
+        <a class="footer-link" href="../../policies/privacy-policy.html">Privacy Policy</a>
+        <a class="footer-link" href="../../policies/terms-and-conditions.html">Terms & Conditions</a>
+      </section>
+    </footer>
+  </body>
+</html>
