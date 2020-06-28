@@ -74,6 +74,11 @@ header {
   -moz-box-shadow: 3px 3px 5px 0px rgba(176,176,176,0.75);
 }
 
+.rounded-border {
+  border: 1px solid #EEEEEE;
+  background-color: white;
+}
+
 footer {
   background-color: #F4F4F6;
   border-top: 1px solid #EEEEEE;

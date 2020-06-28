@@ -52,6 +52,11 @@ a[target="_blank"]::after {
 header {
   display: flex;
   flex-direction: column;
+
+  background: url("../images/wave-header.svg");
+  background-position: top;
+  background-size: cover;
+  background-repeat: repeat-x;
   width: 100%;
 }
 .header-container {
@@ -78,7 +83,7 @@ header {
   justify-content: center;
 }
 .header-link {
-  padding: 0 5px 0 5px;
+  margin-right: 5px;
 }
 .header-link a {
   text-decoration: none;
@@ -123,6 +128,10 @@ header {
     width: 100%;
     overflow-x: scroll;
 }
+.rounded-border {
+  padding: 0.15em;
+  border-radius: 5px;
+}
 
 /* Footer Styling */
 footer {
@@ -132,15 +141,20 @@ footer {
   align-items: center;
   justify-content: center;
 
-  padding: 1.25rem 0 1.25rem 0;
+  background: url("../images/wave-footer.svg");
+  background-position: bottom;
+  background-size: contain;
+  background-repeat: repeat-x;
 
-  flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+  padding-top: 1.25rem;
+
   width: 100%;
 }
 .footer-item {
   margin-bottom: 5px;
   display: flex;
   justify-content: center;
+
 }
 .social-media-icon {
   width: 25px;
@@ -157,6 +171,7 @@ footer {
   header {
     flex-direction: row;
     justify-content: space-between;
+    background-size: auto;
   }
   .page {
     display: flex;
@@ -179,6 +194,9 @@ footer {
   }
   /* Content Styling */
   /* Footer Styling */
+  footer {
+    background-size: auto;
+  }
 }
 
 /* Desktop Styling */
@@ -188,6 +206,7 @@ footer {
   header {
     flex-direction: row;
     justify-content: space-between;
+    background-size: auto;
   }
   h1, h2, h3, h4, h5, h6 {
     /*text-align: left;*/ /* TODO: Figure out what looks better: left or centered. For now it's centered. */
@@ -213,4 +232,7 @@ footer {
   }
   /* Content Styling */
   /* Footer Styling */
+  footer {
+    background-size: auto;
+  }
 }
