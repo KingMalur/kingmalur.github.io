@@ -44,7 +44,7 @@ p:last-of-type {
   margin-bottom: 0;
 }
 a[target="_blank"]::after {
-  content: url(../images/external-link.svg);
+  content: url("../images/external-link.svg");
   margin: 0 3px;
 }
 
@@ -143,8 +143,8 @@ footer {
 
   background: url("../images/wave-footer.svg");
   background-position: bottom;
-  background-size: contain;
   background-repeat: repeat-x;
+  background-size: cover;
 
   padding-top: 1.25rem;
 
@@ -154,7 +154,9 @@ footer {
   margin-bottom: 5px;
   display: flex;
   justify-content: center;
-
+}
+.footer-item:last-of-type {
+  margin-bottom: 15px;
 }
 .social-media-icon {
   width: 25px;
@@ -162,6 +164,9 @@ footer {
 }
 .footer-link {
   margin-right: 5px;
+}
+.footer-link:last-of-type {
+  margin-right: 0;
 }
 
 /* Tablet Styling */
