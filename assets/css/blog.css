@@ -16,6 +16,12 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding-bottom: 5px;
+}
+
+.blog-link-entry:last-of-type {
+  padding-bottom: 0;
 }
 
 .blog-entry-pinned {
