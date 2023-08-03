@@ -1,0 +1,231 @@
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 14px;
+  font-family: "Noto Sans JP", "Arial", sans-serif;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* Avoid the IE 10-11 `min-height` bug. */
+}
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.35rem;
+}
+h3 {
+  font-size: 1.2rem;
+}
+h3, h4, h5, h6 {
+  font-size: 1.1rem;
+}
+p {
+  line-height: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+ol, ul {
+  margin-bottom: 10px;
+  margin-left: 25px;
+}
+p:last-of-type {
+  margin-bottom: 0;
+}
+a[target="_blank"]::after {
+  content: url("../images/external-link.svg");
+  margin: 0 3px;
+}
+
+/* Header Styling */
+header {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+.header-container:last-of-type {
+  padding-bottom: 10px;
+}
+.header-image {
+  width: 25vw;
+}
+.header-image img {
+  min-width: 50px;
+  max-width: 100%;
+  height: auto;
+}
+.header-links {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.header-link {
+  margin-right: 5px;
+}
+.header-link a {
+  text-decoration: none;
+}
+.footer-link a[target="_blank"]::after {
+  content: none;
+}
+.header-link-selected a {
+  text-decoration: underline;
+}
+
+/* Content Styling */
+.image-link[target="_blank"]::after {
+  content: none;
+}
+.page {
+  flex: 1 0 auto; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+    width: 95%;
+}
+.section-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.section-container:last-of-type {
+  border-bottom: none;
+}
+.centered-paragraph {
+  display: flex;
+  justify-content: center;
+}
+.hint {
+  margin: 5px 0;
+  font-size: 0.8em;
+}
+.card-with-shadow {
+  margin: 1em 0;
+  padding: 0.8em 1em;
+  position: relative;
+}
+.scroll-box {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+/* Footer Styling */
+footer {
+  flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding-top: 1.25rem;
+
+  width: 100%;
+}
+.footer-item {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+}
+.footer-item:first-of-type {
+  margin-top: 15px;
+}
+.footer-item:last-of-type {
+  margin-bottom: 15px;
+}
+.social-media-icon {
+  width: 25px;
+  height: 25px;
+}
+.footer-link {
+  margin-right: 5px;
+}
+.footer-link:last-of-type {
+  margin-right: 0;
+}
+
+/* Tablet Styling */
+@media only screen and (min-width: 601px) and (max-width: 960px) {
+  /* General Styling */
+  /* Header Styling */
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    background-size: auto;
+  }
+  .page {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+  .header-container {
+    justify-content: space-between;
+    margin: 10px 10px 0 10px;
+  }
+  .header-image {
+    width: 100px;
+  }
+  .header-links {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  .header-name {
+    margin-bottom: 10px;
+  }
+  /* Content Styling */
+  /* Footer Styling */
+  footer {
+    background-size: auto;
+  }
+}
+
+/* Desktop Styling */
+@media only screen and (min-width: 961px) {
+  /* General Styling */
+  /* Header Styling */
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    background-size: auto;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    /*text-align: left;*/ /* TODO: Figure out what looks better: left or centered. For now it's centered. */
+  }
+  .page {
+    display: flex;
+    flex-direction: column;
+    width: 960px;
+  }
+  .header-container {
+    justify-content: space-between;
+    margin: 10px 10px 0 10px;
+  }
+  .header-image {
+    width: 100px;
+  }
+  .header-links {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  .header-name {
+    margin-bottom: 10px;
+  }
+  /* Content Styling */
+  /* Footer Styling */
+  footer {
+    background-size: auto;
+  }
+}

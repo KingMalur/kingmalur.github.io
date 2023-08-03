@@ -1,0 +1,84 @@
+.timeline {
+  list-style-type: none;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.timeline-item-left,
+.timeline-item-right {
+  margin: 1em 0;
+  padding: 0.8em 1em;
+  position: relative;
+}
+
+.timeline-line {
+  z-index: -1;
+  width: 1px;
+  height: calc(100% - 35px);
+  position: absolute;
+  top: 20px;
+  left: -5px;
+}
+
+.timeline-bullet {
+  float: left;
+  position:absolute;
+  left: -15px;
+  top: 5px;
+  margin-right: 20px;
+  height: 21px;
+  width: 21px;
+  line-height: 21px;
+  border-radius: 100px;
+  font-weight: 700;
+}
+
+.timeline-item-hint {
+  margin-top: 0.5em;
+}
+
+.timeline-item-hint {
+  font-size: 0.8em;
+}
+
+/* Tablet & Desktop Styling */
+/* Different min-width because the timeline looks aweful with less space */
+@media only screen and (min-width: 601px) {
+  .timeline-line {
+    z-index: -1;
+    width: 1px;
+    height: calc(100% - 35px);
+    position: absolute;
+    left: 50%;
+    top: 20px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .timeline-item-left {
+    width: calc(50% - 5px);
+    text-align: right;
+    padding-left: 0;
+    padding-right: 15px;
+  }
+
+  .timeline-item-right {
+    width: calc(50% - 5px);
+  }
+
+  .timeline-item-left .timeline-bullet {
+    position: absolute;
+    left: calc(100% - 5px);
+  }
+
+  .timeline-item-right {
+    left: calc(50% + 5px);
+  }
+}

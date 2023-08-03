@@ -1,0 +1,34 @@
+/* Overwrite the master setting even if it's not centered on desktop because it just looks better */
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
+.knowledge-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.knowledge-gallery-item {
+  display: flex;
+  flex: 1 0 calc(25% - 10px);
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1.2em;
+}
+
+.knowledge-gallery-item:last-of-type {
+  padding-bottom: 0em;
+}
+
+.knowledge-list {
+  position: relative;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 1.2em;
+}
+
+.knowledge-list-item-good:before {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE0SURBVHhe7dY/aoRAGAXwL1EEKxuxtBAUL2HjGSwEO0uxthLiFfZCNl5HtBoEQdydiSEwWOwas+vK+4F/8APhPYZhCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4Ax83/8yTXO+vc6f35/OjQe2LGt2XXdO03SO47iapknMPsT9ZHjgrusqwzAoCAKybXuZ/LpcLtT3/TkKuCew7K0L2BJY9lYF8MBt21aMMRqGgcqyJFVVl+k2PwUcchNc27TyPKeiKMRcURTx3MMhClgLnGUZJUmyaXk/4iUFvDKw7CkFHCmw7F8K4IH5SUvXdXHaiqLoMIFluxTwzE1rb5sKOPKSftRdBZwpsGy1gDMHlomTIA/MT1q3ixzHIc/zxPCvxnGkuq4pDEPSNG35ut2e/2uahhhjdAUO36zsMf5qMQAAAABJRU5ErkJggg==);
+  margin: 0 3px 0 5px;
+}
